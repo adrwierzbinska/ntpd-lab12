@@ -1,0 +1,9 @@
+# ladowanie danych do PostgreSQL (load_data.py)
+pandas==2.2.3
+SQLAlchemy==2.0.36
+psycopg2-binary==2.9.10
+
+# opcjonalnie: automatyczna konfiguracja Metabase + zrzuty (setup_metabase.py)
+# po instalacji playwright: playwright install chromium
+requests==2.34.2
+playwright==1.60.0

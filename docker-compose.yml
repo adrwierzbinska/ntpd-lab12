@@ -1,0 +1,29 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: sensors_postgres
+    environment:
+      POSTGRES_USER: bi
+      POSTGRES_PASSWORD: bi
+      POSTGRES_DB: sensors
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bi -d sensors"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  metabase:
+    image: metabase/metabase:latest
+    container_name: sensors_metabase
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:
